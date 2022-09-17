@@ -14,7 +14,7 @@ create table EXHIBITION
     name       varchar(50)  not null,
     start_date TIMESTAMP    not null,
     end_date   TIMESTAMP    not null,
-    county     varchar(50)  not null,
+    country     varchar(50)  not null,
     city       varchar(50)  not null,
     place      varchar(100) not null,
     organizer  varchar(50)
