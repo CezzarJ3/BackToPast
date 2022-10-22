@@ -1,13 +1,16 @@
 package cs.julia.backtopast.exhibit.domain;
 
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "EXHIBIT")
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Accessors(chain = true)
 public class Exhibit {
     @Id
@@ -21,12 +24,12 @@ public class Exhibit {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "year", nullable = false)
+    @Column(name = "year")
     private int year;
 
     @Column(name = "author")
     private String author;
 
-    @Column(name = "hall_number")
-    private int hall_number;
+    @Column(name = "type", nullable = false)
+    private int type;
 }

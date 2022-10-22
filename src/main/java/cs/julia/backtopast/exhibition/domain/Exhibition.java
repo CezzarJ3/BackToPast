@@ -1,6 +1,6 @@
-package cs.julia.backtopast.exhibition;
+package cs.julia.backtopast.exhibition.domain;
 
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
@@ -8,7 +8,10 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "EXHIBITION")
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Accessors(chain = true)
 public class Exhibition {
     @Id
@@ -34,6 +37,6 @@ public class Exhibition {
     @Column(name = "place", nullable = false, length = 100)
     private String place;
 
-    @Column(name = "organizer", nullable = false, length = 50)
+    @Column(name = "organizer", length = 50)
     private String organizer;
 }
