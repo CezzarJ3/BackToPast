@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Departments</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+
+<h1>Departments!</h1>
+<p><a th:href="@{~/backtopastapp}">На главную</a></p>
+<div th:each="deparment : ${deps}">
+    <span th:text="${deparment.name}">DEP</span>
+</div>
+
+<h1>Form to create a department!</h1>
+<form th:object="${department}" method="post">
+    <p>Name: <input type="text" th:field="*{name}"/></p>
+    <p><input type="submit" value="Submit" />
+</form>
+</body>
+</html>

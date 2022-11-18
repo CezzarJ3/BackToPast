@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Exhibit</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+<p><a th:href="@{/exhibits}">Вернуться к списку экспонатов</a></p>
+
+<form th:object="${exhibitToUpdate}" method="post">
+    <p>
+        Экспонат:
+    <p>Название: <span th:text="${exhibit.name}">Name</span></p>
+    <p>Прежнее описние: <span th:text="${exhibit.description}">Desc</span></p>
+    </p>
+    <p>Новое описание: <input type="text" th:field="*{description}"/></p>
+        <p><input type="submit" value="Submit"/>
+</form>
+</body>
+</html>

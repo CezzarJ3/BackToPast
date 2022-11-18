@@ -1,5 +1,6 @@
 package cs.julia.backtopast.hall;
 
+import cs.julia.backtopast.department.domain.Department;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -21,6 +22,7 @@ public class Hall {
     @Column(name = "number", nullable = false)
     private int number;
 
-    @Column(name = "type", nullable = false)
-    private int type;
+    @ManyToOne
+    @JoinColumn(name = "type", nullable = false)
+    private Department department;
 }

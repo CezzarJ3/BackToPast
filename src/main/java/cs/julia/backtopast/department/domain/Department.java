@@ -20,4 +20,12 @@ public class Department {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "exhibitToDelete=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

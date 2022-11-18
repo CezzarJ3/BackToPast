@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exhibits</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+<h1>Exhibits!</h1>
+<p><a th:href="@{~/backtopastapp}">На главную</a></p>
+<p><a th:href="@{/exhibits/createExhibit}">Создать экспонат</a></p>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th th:text="Id"/>
+        <th th:text="Name"/>
+        <th th:text="Description"/>
+        <th th:text="Year"/>
+        <th th:text="Author"/>
+        <th th:text="Deparment"/>
+        <th th:text="Update"/>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="exhibit, iStat : ${exhibitPage.content}"
+        th:style="${iStat.odd}? 'font-weight: bold;'"
+        th:alt-title="${iStat.even}? 'even' : 'odd'">
+        <td th:text="${exhibit.id}"/>
+        <td th:text="${exhibit.name}"/>
+        <td th:text="${exhibit.description}"/>
+        <td th:text="${exhibit.year}"/>
+        <td th:text="${exhibit.author}"/>
+        <td th:text="${exhibit.department.name}"/>
+        <td><a th:href="@{/exhibits/updateExhibit/{id}(id=${exhibit.id})}" th:text="update"></a></td>
+        <td><a th:href="@{/exhibits/deleteExhibit/{id}(id=${exhibit.id})}" th:text="delete"></a></td>
+    </tr>
+    </tbody>
+</table>
+<div th:if="${exhibitPage.totalPages > 0}" class="pagination"
+     th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumber})}"
+       th:text="${pageNumber}"
+       th:class="${pageNumber==exhibitPage.number + 1} ? active"></a>
+</div>
+</body>
+</html>

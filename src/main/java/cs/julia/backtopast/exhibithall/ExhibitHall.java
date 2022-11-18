@@ -19,12 +19,12 @@ public class ExhibitHall {
     @Column(name = "id", nullable = false)
     private int id;
 
+    @Column(name = "moving_date", nullable = false)
+    private Timestamp movingDate;
+
     @Column(name = "hall_id", nullable = false)
     private int hallId;
 
     @Column(name = "exhibit_id", nullable = false)
     private int exhibitId;
-
-    @Column(name = "moving_date", nullable = false)
-    private Timestamp movingDate;
 }

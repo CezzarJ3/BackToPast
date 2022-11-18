@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exhibits</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+<h1>Exhibits!</h1>
+
+<h1>Form to create an exhibit!</h1>
+<form th:object="${exhibitDto}" method="post">
+    <p>Name: <input type="text" th:field="*{name}"/></p>
+    <p>Description: <input type="text" th:field="*{description}"/></p>
+    <p>Year: <input type="text" th:field="*{year}"/></p>
+    <p>Author: <input type="text" th:field="*{author}"/></p>
+    <p>Department:
+        <select th:field="*{type}">
+            <option th:each="dep : ${deps}"  th:value="${dep.id}" th:text="${dep.name}"></option>
+        </select></p>
+    <p><input type="submit" value="Submit"/>
+</form>
+
+<p><a th:href="@{/exhibits}">Вернуться к списку экспонатов</a></p>
+</body>
+</html>

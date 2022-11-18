@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Exhibit</title>
+</head>
+<body>
+
+<p><a th:href="@{/exhibits}">Вернуться к списку экспонатов</a></p>
+
+<form th:object="${exhibitToDelete}" method="post">
+    <p>
+        Название: <span th:text="${exhibit.name}"></span>
+        Описание: <span th:text="${exhibit.description}"></span>
+        Год создания: <span th:text="${exhibit.year}"></span>
+        Автор: <span th:text="${exhibit.author}"></span>
+        Отдел: <span th:text="${exhibit.department.name}"></span>
+    </p>
+    <p><input type="submit" value="Удалить" th:field="*{id}" />
+</form>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package cs.julia.backtopast.exhibit.domain;
 
+import cs.julia.backtopast.department.domain.Department;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -30,6 +31,7 @@ public class Exhibit {
     @Column(name = "author")
     private String author;
 
-    @Column(name = "type", nullable = false)
-    private int type;
+    @ManyToOne
+    @JoinColumn(name = "type",referencedColumnName = "id", nullable = false)
+    private Department department;
 }

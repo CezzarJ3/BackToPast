@@ -1,5 +1,6 @@
 package cs.julia.backtopast.storage;
 
+import cs.julia.backtopast.department.domain.Department;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -18,9 +19,10 @@ public class Storage {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "type", nullable = false)
-    private String type;
-
     @Column(name = "manager", nullable = false)
     private String manager;
+
+    @ManyToOne
+    @JoinColumn(name = "type", nullable = false)
+    private Department department;
 }
