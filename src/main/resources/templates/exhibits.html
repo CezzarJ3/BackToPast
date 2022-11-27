@@ -20,7 +20,6 @@
         <th th:text="Year"/>
         <th th:text="Author"/>
         <th th:text="Deparment"/>
-        <th th:text="Update"/>
     </tr>
     </thead>
     <tbody>
@@ -29,12 +28,11 @@
         th:alt-title="${iStat.even}? 'even' : 'odd'">
         <td th:text="${exhibit.id}"/>
         <td th:text="${exhibit.name}"/>
-        <td th:text="${exhibit.description}"/>
+        <td><a th:href="@{/exhibits/updateExhibit/{id}(id=${exhibit.id})}" th:text="${exhibit.description}"></a></td>
         <td th:text="${exhibit.year}"/>
         <td th:text="${exhibit.author}"/>
         <td th:text="${exhibit.department.name}"/>
-        <td><a th:href="@{/exhibits/updateExhibit/{id}(id=${exhibit.id})}" th:text="update"></a></td>
-        <td><a th:href="@{/exhibits/deleteExhibit/{id}(id=${exhibit.id})}" th:text="delete"></a></td>
+<!--        <td><a th:href="@{/exhibits/deleteExhibit/{id}(id=${exhibit.id})}" th:text="delete"></a></td>-->
     </tr>
     </tbody>
 </table>

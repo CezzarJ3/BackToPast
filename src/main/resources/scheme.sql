@@ -3,7 +3,7 @@ create table EXHIBIT
     id          int primary key auto_increment,
     name        varchar(100)  not null,
     description varchar(255) not null,
-    year        YEAR         not null,
+    year        int         not null,
     author      varchar(100),
     type        int          not null,
     constraint fk_type foreign key (type) references DEPARTMENT (id)

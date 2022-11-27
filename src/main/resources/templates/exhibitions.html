@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exhibitions</title>
+  <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+<h1>Exhibits!</h1>
+<p><a th:href="@{~/backtopastapp}">На главную</a></p>
+<p><a th:href="@{/exhibits/createExhibit}">Создать экспонат</a></p>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th th:text="Id"/>
+        <th th:text="Name"/>
+        <th th:text="Description"/>
+        <th th:text="Year"/>
+        <th th:text="Author"/>
+        <th th:text="Deparment"/>
+        <th th:text="Update"/>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="exhibition, iStat : ${exhibitionPage.content}"
+        th:style="${iStat.odd}? 'font-weight: bold;'"
+        th:alt-title="${iStat.even}? 'even' : 'odd'">
+        <td th:text="${exhibiiton.id}"/>
+        <td th:text="${exhibition.name}"/>
+        <td th:text="${exhibition.description}"/>
+        <td th:text="${exhibition.year}"/>
+        <td th:text="${exhibition.author}"/>
+        <td th:text="${exhibition.department.name}"/>
+    </tr>
+    </tbody>
+</table>
+<div th:if="${exhibitionPage.totalPages > 0}" class="pagination"
+     th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/exhibitionss(size=${exhibitionPage.size}, page=${pageNumber})}"
+       th:text="${pageNumber}"
+       th:class="${pageNumber==exhibitionPage.number + 1} ? active"></a>
+</div>
+</body>
+</html>

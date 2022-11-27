@@ -73,7 +73,7 @@ public class ExhibitController {
         model.addAttribute("exhibitToDelete", new Exhibit());
         Exhibit exhibit = exhibitService.findById(id);
         model.addAttribute("exhibit", exhibit);
-        return "deleteExhibit";
+        return "redirect:/exhibits";
     }
 
     @PostMapping("/deleteExhibit/{id}")
