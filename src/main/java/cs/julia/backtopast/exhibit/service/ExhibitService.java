@@ -9,15 +9,9 @@ import java.util.Collection;
 
 public interface ExhibitService {
     void createExhibit(ExhibitDto exhibitDto);
-
     Collection<Exhibit> findExhibitsByName(String name);
-
-    Collection<Exhibit> findAllExhibits();
-
     void deleteExhibit(int exhibitId);
-
     void updateExhibitDescription(Integer exhibitId, String newDescription);
-
     Page<Exhibit> findPaginated(Pageable pageable);
     Exhibit findById(int id);
 }

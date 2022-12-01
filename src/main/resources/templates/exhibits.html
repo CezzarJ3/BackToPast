@@ -7,40 +7,102 @@
     <link rel="stylesheet" th:href="@{/styles.css}"/>
 </head>
 <body>
-<h1>Exhibits!</h1>
-<p><a th:href="@{~/backtopastapp}">На главную</a></p>
-<p><a th:href="@{/exhibits/createExhibit}">Создать экспонат</a></p>
-
-<table border="1">
-    <thead>
-    <tr>
-        <th th:text="Id"/>
-        <th th:text="Name"/>
-        <th th:text="Description"/>
-        <th th:text="Year"/>
-        <th th:text="Author"/>
-        <th th:text="Deparment"/>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="exhibit, iStat : ${exhibitPage.content}"
-        th:style="${iStat.odd}? 'font-weight: bold;'"
-        th:alt-title="${iStat.even}? 'even' : 'odd'">
-        <td th:text="${exhibit.id}"/>
-        <td th:text="${exhibit.name}"/>
-        <td><a th:href="@{/exhibits/updateExhibit/{id}(id=${exhibit.id})}" th:text="${exhibit.description}"></a></td>
-        <td th:text="${exhibit.year}"/>
-        <td th:text="${exhibit.author}"/>
-        <td th:text="${exhibit.department.name}"/>
-<!--        <td><a th:href="@{/exhibits/deleteExhibit/{id}(id=${exhibit.id})}" th:text="delete"></a></td>-->
-    </tr>
-    </tbody>
-</table>
-<div th:if="${exhibitPage.totalPages > 0}" class="pagination"
-     th:each="pageNumber : ${pageNumbers}">
-    <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumber})}"
-       th:text="${pageNumber}"
-       th:class="${pageNumber==exhibitPage.number + 1} ? active"></a>
+<div class="navbar">
+    <div class="content">
+        <ul>
+            <li><a th:href="@{~/backtopastapp}">Главная</a></li>
+            <li class="active"><a th:href="@{/exhibits}">Exhibits</a></li>
+            <li><a th:href="@{/departments}">Departments</a></li>
+        </ul>
+    </div>
 </div>
+<div class="main-content">
+    <h1>Exhibits!</h1>
+    <p><a th:href="@{/exhibits/createExhibit}">Создать экспонат</a></p>
+
+    <div class="pagination">
+        <a th:href="@{/exhibits(size=${exhibitPage.size}, page=1)}"
+           class="pagination"> << </a>
+        <div th:if="${exhibitPage.totalPages > 0}"
+             th:each="pageNumber : ${pageNumbers}" class="pagination">
+            <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumber})}"
+               th:text="${pageNumber}"
+               th:class="${pageNumber==exhibitPage.number + 1} ? active"></a>
+        </div>
+        <div class="pagination">
+            <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumbers.get(pageNumbers.size()-1)})}"
+               class="pagination"> >> </a>
+        </div>
+    </div>
+
+    <table class="paginated-content-table" cellspacing="0">
+        <thead>
+        <tr>
+            <th th:text="Id"/>
+            <th th:text="Name"/>
+            <th th:text="Description"/>
+            <th th:text="Year"/>
+            <th th:text="Author"/>
+            <th th:text="Deparment"/>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="exhibit, iStat : ${exhibitPage.content}"
+            th:style="${iStat.odd}? 'font-weight: bold;'">
+            <td th:text="${exhibit.id}"/>
+
+            <td>
+                <button th:text="${exhibit.name}" th:onclick="|openEditForm('editForm'+${exhibit.id})|"></button>
+            </td>
+            <div th:class="form-popup" th:id="'editForm'+${exhibit.id}">
+                <div class="form-popup-content">
+
+                    <form th:object="${exhibitToUpdate}" method="post" th:action="@{/exhibits/{id}(id=${exhibit.id})}">
+                        <p>Экспонат:</p>
+                        <p>Название: <span th:text="${exhibit.name}">Name</span></p>
+                        <p>Прежнее описание: <span th:text="${exhibit.description}">Desc</span></p>
+                        <p>Новое описание: <input type="text" th:field="*{description}" placeholder="Новое описание"/></p>
+                        <p><input type="submit" value="Submit"/>
+                    </form>
+                    <button th:onclick="|closeEditForm('editForm'+${exhibit.id})|">Закрыть</button>
+                    <p><a th:href="@{/exhibits/deleteExhibit/{id}(id=${exhibit.id})}">Удалить</a></p>
+
+                </div>
+            </div>
+
+            <td th:text="${exhibit.description}"></td>
+            <td th:text="${exhibit.year}"/>
+            <td th:text="${exhibit.author}"/>
+            <td th:text="${exhibit.department.name}"/>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <a th:href="@{/exhibits(size=${exhibitPage.size}, page=1)}"
+           class="pagination"> << </a>
+        <div th:if="${exhibitPage.totalPages > 0}"
+             th:each="pageNumber : ${pageNumbers}" class="pagination">
+            <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumber})}"
+               th:text="${pageNumber}"
+               th:class="${pageNumber==exhibitPage.number + 1} ? active"></a>
+        </div>
+        <div class="pagination">
+            <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumbers.get(pageNumbers.size()-1)})}"
+               class="pagination"> >> </a>
+        </div>
+    </div>
+
+</div>
+
+<script th:inline="javascript">
+    function openEditForm(editForm) {
+        document.getElementById(editForm).style.display = "block";
+    }
+
+    function closeEditForm(editForm) {
+        document.getElementById(editForm).style.display = "none";
+    }
+</script>
 </body>
 </html>

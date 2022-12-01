@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
@@ -38,12 +37,21 @@ public class ExhibitController {
         model.addAttribute("exhibitPage", exhibitPage);
 
         int totalPages = exhibitPage.getTotalPages();
+
         if (totalPages > 0) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                    .boxed()
-                    .collect(Collectors.toList());
+            List<Integer> pageNumbers;
+            if (totalPages > 10) {
+                pageNumbers = IntStream.range(
+                        currentPage > 5 ? (currentPage - 5) : 1,
+                        (totalPages - currentPage) > 5 ? (currentPage + 5) : totalPages
+                ).boxed().toList();
+            } else {
+                pageNumbers = IntStream.rangeClosed(1, totalPages)
+                        .boxed().toList();
+            }
             model.addAttribute("pageNumbers", pageNumbers);
         }
+        model.addAttribute("exhibitToUpdate", new Exhibit());
         return "exhibits";
     }
 
@@ -69,30 +77,23 @@ public class ExhibitController {
     }
 
     @GetMapping("/deleteExhibit/{id}")
-    public String getDeleteExhibit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("exhibitToDelete", new Exhibit());
-        Exhibit exhibit = exhibitService.findById(id);
-        model.addAttribute("exhibit", exhibit);
-        return "redirect:/exhibits";
-    }
-
-    @PostMapping("/deleteExhibit/{id}")
-    public String deleteExhibit(@ModelAttribute("exhibitToDelete") Exhibit exhibit) {
-        exhibitService.deleteExhibit(exhibit.getId());
+    public String getDeleteExhibit(@PathVariable("id") int id) {
+        exhibitService.deleteExhibit(id);
         return "redirect:/exhibits";
     }
 
     @GetMapping("/updateExhibit/{id}")
     public String getUpdateExhibit(Model model, @PathVariable("id") int id) {
         model.addAttribute("exhibitToUpdate", new Exhibit());
+        model.addAttribute("exhibitToDelete", new Exhibit());
         Exhibit exhibit = exhibitService.findById(id);
         model.addAttribute("exhibit", exhibit);
         return "/updateExhibit";
     }
 
-    @PostMapping("/updateExhibit/{id}")
-    public String updateExhibit(@ModelAttribute("exhibitToUpdate") Exhibit exhibit) {
-        exhibitService.updateExhibitDescription(exhibit.getId(), exhibit.getDescription());
+    @PostMapping("/{id}")
+    public String updateExhibit(@ModelAttribute("exhibitToUpdate") Exhibit exhibit, @PathVariable("id") Integer id) {
+        exhibitService.updateExhibitDescription(id, exhibit.getDescription());
         return "redirect:/exhibits";
     }
 }

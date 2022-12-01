@@ -24,8 +24,7 @@
     </thead>
     <tbody>
     <tr th:each="exhibition, iStat : ${exhibitionPage.content}"
-        th:style="${iStat.odd}? 'font-weight: bold;'"
-        th:alt-title="${iStat.even}? 'even' : 'odd'">
+        th:style="${iStat.odd}? 'font-weight: bold;'">
         <td th:text="${exhibiiton.id}"/>
         <td th:text="${exhibition.name}"/>
         <td th:text="${exhibition.description}"/>

@@ -51,12 +51,6 @@ public class ExhibitServiceImpl implements ExhibitService {
     }
 
     @Override
-    @Transactional
-    public Collection<Exhibit> findAllExhibits() {
-        return (Collection<Exhibit>) exhibitRepository.findAll();
-    }
-
-    @Override
     public void deleteExhibit(int exhibitId) {
         exhibitRepository.deleteById(exhibitId);
     }

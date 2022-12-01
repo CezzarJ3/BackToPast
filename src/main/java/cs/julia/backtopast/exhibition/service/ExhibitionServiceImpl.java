@@ -40,11 +40,6 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
-    public Collection<Exhibition> findAllExhibitions() {
-        return (Collection<Exhibition>) exhibitionRepository.findAll();
-    }
-
-    @Override
     public Collection<Exhibition> finaAllByName(String name) {
         return exhibitionRepository.findAllByNameContainingIgnoreCase(name);
     }

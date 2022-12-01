@@ -1,6 +1,5 @@
 package cs.julia.backtopast.exhibition.dao;
 
-import cs.julia.backtopast.exhibit.domain.Exhibit;
 import cs.julia.backtopast.exhibition.domain.Exhibition;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
