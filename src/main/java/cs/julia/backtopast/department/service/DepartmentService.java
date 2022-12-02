@@ -7,7 +7,9 @@ import java.util.Collection;
 public interface DepartmentService {
     void create(Department department);
 
+    void delete(Integer id);
+
     Collection<Department> findAllByName(String name);
 
-    Collection<Department>  findAll();
+    Collection<Department> findAll();
 }

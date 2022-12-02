@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Departments</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+<div class="main-content">
+    <div class="navbar">
+        <div class="content">
+            <ul>
+                <li><a th:href="@{~/backtopastapp}">Главная</a></li>
+                <li><a th:href="@{/exhibits}">Exhibits</a></li>
+                <li class="active"><a th:href="@{/departments}">Departments</a></li>
+                <li><a th:href="@{/exhibitions}">Exhibitions</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <table class="paginated-content-table" cellspacing="0" style="width: 100%;">
+        <thead>
+        <tr>
+            <th th:text="Id"/>
+            <th th:text="Name"/>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="department : ${deps}">
+            <td>
+                <button th:text="${department.id}" th:onclick="|openEditForm('editForm'+${department.id})|"></button>
+            </td>
+            <div th:class="form-popup" th:id="'editForm'+${department.id}">
+                <div class="form-popup-content">
+                    <p>Удалить отдел музея?</p>
+                    <button th:onclick="|closeEditForm('editForm'+${department.id})|">Закрыть</button>
+                    <p><a th:href="@{/departments/deleteDepartment/{id}(id=${department.id})}">Удалить</a></p>
+
+                </div>
+            </div>
+
+            <td th:text="${department.name}"/>
+        </tr>
+        </tbody>
+    </table>
+
+    <h1>Form to create a department!</h1>
+    <form th:object="${department}" method="post">
+        <p>Name: <input type="text" th:field="*{name}"/></p>
+        <p><input type="submit" value="Submit"/>
+    </form>
+</div>
+
+<script th:inline="javascript">
+    function openEditForm(editForm) {
+        document.getElementById(editForm).style.display = "block";
+    }
+
+    function closeEditForm(editForm) {
+        document.getElementById(editForm).style.display = "none";
+    }
+</script>
+</body>
+</html>

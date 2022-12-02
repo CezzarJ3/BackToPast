@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
@@ -35,10 +34,18 @@ public class ExhibitionController {
         model.addAttribute("exhibitionPage", exhibitionPage);
 
         int totalPages = exhibitionPage.getTotalPages();
+
         if (totalPages > 0) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                    .boxed()
-                    .collect(Collectors.toList());
+            List<Integer> pageNumbers;
+            if (totalPages > 10) {
+                pageNumbers = IntStream.range(
+                        currentPage > 5 ? (currentPage - 5) : 1,
+                        (totalPages - currentPage) > 5 ? (currentPage + 5) : totalPages
+                ).boxed().toList();
+            } else {
+                pageNumbers = IntStream.rangeClosed(1, totalPages)
+                        .boxed().toList();
+            }
             model.addAttribute("pageNumbers", pageNumbers);
         }
 

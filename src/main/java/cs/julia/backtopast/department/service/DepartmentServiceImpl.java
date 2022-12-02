@@ -24,6 +24,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    public void delete(Integer id) {
+        departmentRepository.deleteById(id);
+    }
+
+    @Override
     public Collection<Department> findAllByName(String name) {
         return (Collection<Department>) departmentRepository.findAllByNameContainingIgnoreCase(name);
     }

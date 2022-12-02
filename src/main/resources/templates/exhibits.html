@@ -5,33 +5,39 @@
     <meta charset="UTF-8">
     <title>Exhibits</title>
     <link rel="stylesheet" th:href="@{/styles.css}"/>
+    <link rel="stylesheet" th:href="@{/exhibit-page-styles.css}"/>
 </head>
 <body>
-<div class="navbar">
-    <div class="content">
-        <ul>
-            <li><a th:href="@{~/backtopastapp}">Главная</a></li>
-            <li class="active"><a th:href="@{/exhibits}">Exhibits</a></li>
-            <li><a th:href="@{/departments}">Departments</a></li>
-        </ul>
-    </div>
-</div>
 <div class="main-content">
-    <h1>Exhibits!</h1>
-    <p><a th:href="@{/exhibits/createExhibit}">Создать экспонат</a></p>
-
-    <div class="pagination">
-        <a th:href="@{/exhibits(size=${exhibitPage.size}, page=1)}"
-           class="pagination"> << </a>
-        <div th:if="${exhibitPage.totalPages > 0}"
-             th:each="pageNumber : ${pageNumbers}" class="pagination">
-            <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumber})}"
-               th:text="${pageNumber}"
-               th:class="${pageNumber==exhibitPage.number + 1} ? active"></a>
+    <div class="navbar">
+        <div class="content">
+            <ul>
+                <li><a th:href="@{~/backtopastapp}">Главная</a></li>
+                <li  class="active"><a th:href="@{/exhibits}">Exhibits</a></li>
+                <li><a th:href="@{/departments}">Departments</a></li>
+                <li><a th:href="@{/exhibitions}">Exhibitions</a></li>
+            </ul>
         </div>
+    </div>
+
+    <div class="create-exhibit-style">
+        <p><a th:href="@{/exhibits/createExhibit}">Создать экспонат</a></p>
+    </div>
+
+    <div class="pagination-box">
         <div class="pagination">
-            <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumbers.get(pageNumbers.size()-1)})}"
-               class="pagination"> >> </a>
+            <a th:href="@{/exhibits(size=${exhibitPage.size}, page=1)}"
+               class="pagination"> << </a>
+            <div th:if="${exhibitPage.totalPages > 0}"
+                 th:each="pageNumber : ${pageNumbers}" class="pagination">
+                <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber==exhibitPage.number + 1} ? active"></a>
+            </div>
+            <div class="pagination">
+                <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumbers.get(pageNumbers.size()-1)})}"
+                   class="pagination"> >> </a>
+            </div>
         </div>
     </div>
 
@@ -61,8 +67,9 @@
                         <p>Экспонат:</p>
                         <p>Название: <span th:text="${exhibit.name}">Name</span></p>
                         <p>Прежнее описание: <span th:text="${exhibit.description}">Desc</span></p>
-                        <p>Новое описание: <input type="text" th:field="*{description}" placeholder="Новое описание"/></p>
-                        <p><input type="submit" value="Submit"/>
+                        <p>Новое описание: <input type="text" th:field="*{description}" placeholder="Новое описание"/>
+                        </p>
+                        <p><input type="submit" value="Сохранить изменения"/>
                     </form>
                     <button th:onclick="|closeEditForm('editForm'+${exhibit.id})|">Закрыть</button>
                     <p><a th:href="@{/exhibits/deleteExhibit/{id}(id=${exhibit.id})}">Удалить</a></p>
@@ -78,18 +85,20 @@
         </tbody>
     </table>
 
-    <div class="pagination">
-        <a th:href="@{/exhibits(size=${exhibitPage.size}, page=1)}"
-           class="pagination"> << </a>
-        <div th:if="${exhibitPage.totalPages > 0}"
-             th:each="pageNumber : ${pageNumbers}" class="pagination">
-            <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumber})}"
-               th:text="${pageNumber}"
-               th:class="${pageNumber==exhibitPage.number + 1} ? active"></a>
-        </div>
+    <div class="pagination-box">
         <div class="pagination">
-            <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumbers.get(pageNumbers.size()-1)})}"
-               class="pagination"> >> </a>
+            <a th:href="@{/exhibits(size=${exhibitPage.size}, page=1)}"
+               class="pagination"> << </a>
+            <div th:if="${exhibitPage.totalPages > 0}"
+                 th:each="pageNumber : ${pageNumbers}" class="pagination">
+                <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber==exhibitPage.number + 1} ? active"></a>
+            </div>
+            <div class="pagination">
+                <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumbers.get(pageNumbers.size()-1)})}"
+                   class="pagination"> >> </a>
+            </div>
         </div>
     </div>
 

@@ -1,6 +1,5 @@
 package cs.julia.backtopast.department.controller;
 
-import cs.julia.backtopast.exhibitionpart.dto.DepartmentDto;
 import cs.julia.backtopast.department.domain.Department;
 import cs.julia.backtopast.department.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,24 +28,27 @@ public class DepartmentController {
     public String showDepartments(Model model) {
         List<Department> departments = (List<Department>) departmentService.findAll();
         model.addAttribute("deps", departments);
-        return "deps";
+        return "departments";
     }
 
     @GetMapping("/filter")
     public String showDepartmentsByName(@RequestParam("name") String name, Model model) {
         List<Department> departments = (List<Department>) departmentService.findAllByName(name);
         model.addAttribute("deps", departments);
-        return "deps";
+        return "departments";
     }
 
     @PostMapping
-    public String createDepartment(@ModelAttribute Department department, Model model) {
+    public String createDepartment(@ModelAttribute Department department) {
         System.out.println(department.toString());
         departmentService.create(department);
         return "redirect:/departments";
     }
 
-    private Department mapDtoToDomain(DepartmentDto departmentDto) {
-        return new Department().setName(departmentDto.name());
+    @GetMapping("/deleteDepartment/{id}")
+    public String getDeleteDepartment(@PathVariable("id") Integer id) {
+        departmentService.delete(id);
+        return "redirect:/departments";
     }
+
 }

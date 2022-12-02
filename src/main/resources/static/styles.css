@@ -20,6 +20,8 @@ body a {
 .navbar {
     background-color: #a2ff73;
     height: 50px;
+    width: 100%;
+    z-index: 999;
 }
 
 .content {
@@ -59,18 +61,26 @@ body a {
 .main-content {
     width: 1000px;
     height: 100%;
-    background-color: rgba(150, 123, 103, 0.5);
+    background-color: rgba(150, 123, 103, 0.85);
     margin: 0 auto;
     color: #262626;
     font-size: 17px;
 }
 
+.pagination-box {
+    text-align: center;
+    background-color: rgba(66, 57, 53, 0.4);
+}
+
 .pagination {
     display: inline-block;
-    text-align: center;
+    /*margin: 2px auto;*/
+    height: 100%;
+    margin: 1px auto auto auto;
 }
 
 .pagination a {
+    color: white;
     display: inline-block;
     text-decoration: none;
     float: left;
@@ -79,29 +89,30 @@ body a {
 
 .pagination a:hover {
     border-radius: 3px;
-    background-color: #3c8f3c;
+    background-color: #988476;
     color: aliceblue;
 }
 
 .pagination a.active {
     border-radius: 3px;
-    background-color: #275f27;
+    background-color: rgb(171, 131, 99);
     color: aliceblue;
 }
 
 .paginated-content-table {
     background: rgba(233, 234, 229, 0.5);
-    width: auto;
+    width: 95%;
+    margin: 0 auto;
 }
 
-.paginated-content-table a {
-    text-decoration: none;
-}
+/*.paginated-content-table a {*/
+/*    text-decoration: none;*/
+/*}*/
 
-.paginated-content-table a:hover {
-    text-decoration: none;
-    color: #1821ea;
-}
+/*.paginated-content-table a:hover {*/
+/*    text-decoration: none;*/
+/*    color: #1821ea;*/
+/*}*/
 
 .paginated-content-table th {
     background: deepskyblue;
@@ -121,21 +132,24 @@ body a {
     font-weight: bold;
     cursor: pointer;
     margin: 0 auto;
+    width: 100%;
+    height: 100%;
 }
 
 .paginated-content-table td button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
     cursor: pointer;
 }
 
 .form-popup {
     display: none;
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 30%;
     z-index: 999;
     border-radius: 8px;
     border: 3px solid #ffe9ca;
+    max-width: 400px;
 }
 
 .form-popup-content {
@@ -153,26 +167,34 @@ body a {
 }
 
 .form-popup-content input[type=submit] {
-    background-color: #3ad97f;
+    background-color: #2aff00;
     color: white;
     margin-top: 10px;
     padding: 6px 10px;
     border: none;
     cursor: pointer;
     width: 100%;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     opacity: 0.8;
 }
 
+.form-popup-content input[type=submit]:hover {
+    opacity: 1;
+}
+
 .form-popup-content button {
-    background-color: #4CAF50;
+    background-color: #a97900;
     color: white;
     padding: 6px 10px;
     border: none;
     cursor: pointer;
     width: 100%;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     opacity: 0.8;
+}
+
+.form-popup-content button:hover {
+    opacity: 1;
 }
 
 .form-popup-content a {
@@ -183,8 +205,12 @@ body a {
     border: none;
     cursor: pointer;
     width: 100%;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     opacity: 0.8;
+}
+
+.form-popup-content a:hover {
+    opacity: 1;
 }
 
 
