@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public record ExhibitionDto(String name,
                             Timestamp start_date,
-                            Timestamp end_sate,
+                            Timestamp end_date,
                             String country,
                             String city,
                             String place,

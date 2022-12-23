@@ -2,6 +2,7 @@ package cs.julia.backtopast.exhibition.domain;
 
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -22,9 +23,11 @@ public class Exhibition {
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
+    @DateTimeFormat(pattern = "dd-MM-yyy HH:mm")
     @Column(name = "start_date", nullable = false)
     private Timestamp start_date;
 
+    @DateTimeFormat(pattern = "dd-MM-yyy HH:mm")
     @Column(name = "end_date", nullable = false)
     private Timestamp end_date;
 

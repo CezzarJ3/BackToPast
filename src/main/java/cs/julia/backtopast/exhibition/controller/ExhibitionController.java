@@ -1,16 +1,18 @@
 package cs.julia.backtopast.exhibition.controller;
 
+import cs.julia.backtopast.exhibit.controller.dto.ExhibitDto;
+import cs.julia.backtopast.exhibition.controller.dto.ExhibitionDto;
 import cs.julia.backtopast.exhibition.domain.Exhibition;
 import cs.julia.backtopast.exhibition.service.ExhibitionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -27,7 +29,7 @@ public class ExhibitionController {
 
     @GetMapping
     public String showExhibitions(Model model, @RequestParam("page") Optional<Integer> page,
-                                @RequestParam("size") Optional<Integer> size) {
+                                  @RequestParam("size") Optional<Integer> size) {
 
         int currentPage = page.orElse(1), pageSize = size.orElse(25);
         Page<Exhibition> exhibitionPage = exhibitionService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
@@ -50,5 +52,17 @@ public class ExhibitionController {
         }
 
         return "exhibitions";
+    }
+
+    @PostMapping("/createExhibition")
+    public String createExhibit(@ModelAttribute("exhibitionDto") Exhibition exhibitionDto) {
+        exhibitionService.createExhibition(exhibitionDto);
+        return "redirect:/exhibitions";
+    }
+
+    @GetMapping("/createExhibition")
+    public String getExhibitionDto(Model model) {
+        model.addAttribute("exhibitionDto", new Exhibition());
+        return "createExhibition";
     }
 }

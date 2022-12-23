@@ -1,7 +1,5 @@
 package cs.julia.backtopast.exhibition.service;
 
-import cs.julia.backtopast.exhibit.domain.Exhibit;
-import cs.julia.backtopast.exhibition.controller.ExhibitionController;
 import cs.julia.backtopast.exhibition.controller.dto.ExhibitionDto;
 import cs.julia.backtopast.exhibition.dao.ExhibitionRepository;
 import cs.julia.backtopast.exhibition.domain.Exhibition;
@@ -27,15 +25,17 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
-    public void createExhibition(ExhibitionDto exhibitionDto) {
-        Exhibition exhibition = new Exhibition()
-                .setName(exhibitionDto.name())
-                .setStart_date((Timestamp) exhibitionDto.start_date())
-                .setEnd_date((Timestamp) exhibitionDto.end_sate())
-                .setCountry(exhibitionDto.country())
-                .setCity(exhibitionDto.city())
-                .setPlace(exhibitionDto.place())
-                .setOrganizer(exhibitionDto.organizer());
+    public void createExhibition(Exhibition exhibition) {
+//        Exhibition exhibition = new Exhibition()
+//                .setName(exhibitionDto.name())
+//                .setStart_date(exhibitionDto.start_date())
+//                .setEnd_date(exhibitionDto.end_date())
+//                .setCountry(exhibitionDto.country())
+//                .setCity(exhibitionDto.city())
+//                .setPlace(exhibitionDto.place())
+//                .setOrganizer(exhibitionDto.organizer());
+        exhibition.setStart_date(new Timestamp(122, 11, 17, 0, 0, 0, 0));
+        exhibition.setEnd_date(new Timestamp(122, 11, 18, 0, 0, 0, 0));
         exhibitionRepository.save(exhibition);
     }
 

@@ -178,10 +178,6 @@ body a {
     opacity: 0.8;
 }
 
-.form-popup-content input[type=submit]:hover {
-    opacity: 1;
-}
-
 .form-popup-content button {
     background-color: #a97900;
     color: white;
@@ -191,10 +187,6 @@ body a {
     width: 100%;
     margin-bottom: 10px;
     opacity: 0.8;
-}
-
-.form-popup-content button:hover {
-    opacity: 1;
 }
 
 .form-popup-content a {
@@ -209,8 +201,17 @@ body a {
     opacity: 0.8;
 }
 
-.form-popup-content a:hover {
+.form-popup-content a:hover, button:hover, input[type=submit]:hover {
     opacity: 1;
 }
 
+.create-object-style {
+    line-height: 40px;
+    border-radius: 10px;
+    border: none;
+    background-color: white;
+    width: 140px;
+    padding: 4px;
+    margin: 10px 50px;
+}
 

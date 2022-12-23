@@ -37,6 +37,7 @@ public class ExhibitController {
         model.addAttribute("exhibitPage", exhibitPage);
 
         int totalPages = exhibitPage.getTotalPages();
+        System.out.println(totalPages);
 
         if (totalPages > 0) {
             List<Integer> pageNumbers;

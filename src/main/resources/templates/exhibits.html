@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <div class="create-exhibit-style">
+    <div class="create-object-style">
         <p><a th:href="@{/exhibits/createExhibit}">Создать экспонат</a></p>
     </div>
 
@@ -67,7 +67,7 @@
                         <p>Экспонат:</p>
                         <p>Название: <span th:text="${exhibit.name}">Name</span></p>
                         <p>Прежнее описание: <span th:text="${exhibit.description}">Desc</span></p>
-                        <p>Новое описание: <input type="text" th:field="*{description}" placeholder="Новое описание"/>
+                        <p>Новое описание: <input type="text" name="description" value="Desc" th:value="${exhibit.description}"/>
                         </p>
                         <p><input type="submit" value="Сохранить изменения"/>
                     </form>

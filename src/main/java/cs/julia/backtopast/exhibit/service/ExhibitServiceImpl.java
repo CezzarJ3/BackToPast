@@ -63,7 +63,7 @@ public class ExhibitServiceImpl implements ExhibitService {
                 .ifPresentOrElse(exhibit -> {
                     exhibit.setDescription(newDescription);
                 }, () -> {
-                    throw new EntityNotFoundException("Продукт #[%s] не найден".formatted(exhibitId));
+                    throw new EntityNotFoundException("Экспонат #[%s] не найден".formatted(exhibitId));
                 });
     }
 

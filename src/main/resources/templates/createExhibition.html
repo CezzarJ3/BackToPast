@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Exhibition</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+<div class="main-content">
+    <div class="navbar">
+        <div class="content">
+            <ul>
+                <li><a th:href="@{~/backtopastapp}">Главная</a></li>
+                <li class="active"><a th:href="@{/exhibits}">Exhibits</a></li>
+                <li><a th:href="@{/departments}">Departments</a></li>
+                <li><a th:href="@{/exhibitions}">Exhibitions</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <h1>Form to create an exhibit!</h1>
+    <form th:object="${exhibitionDto}" method="post">
+        <p>Name: <input type="text" th:field="${exhibitionDto.name}"/></p>
+<!--        <p>Start date: <input type="date" th:field="${exhibitionDto.start_date}"/></p>-->
+<!--        <p>End date: <input type="date" th:field="${exhibitionDto.end_date}"/></p>-->
+        <p>Country: <input type="text" th:field="${exhibitionDto.country}"/></p>
+        <p>City: <input type="text" th:field="${exhibitionDto.city}"/></p>
+        <p>Place: <input type="text" th:field="${exhibitionDto.place}"/></p>
+        <p>Organizer: <input type="text" th:field="${exhibitionDto.organizer}"/></p>
+        <p><input type="submit" value="Submit"/>
+    </form>
+
+</div>
+</body>
+</html>
