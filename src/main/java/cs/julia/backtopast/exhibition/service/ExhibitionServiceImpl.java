@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -25,17 +27,21 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
-    public void createExhibition(Exhibition exhibition) {
-//        Exhibition exhibition = new Exhibition()
-//                .setName(exhibitionDto.name())
-//                .setStart_date(exhibitionDto.start_date())
-//                .setEnd_date(exhibitionDto.end_date())
-//                .setCountry(exhibitionDto.country())
-//                .setCity(exhibitionDto.city())
-//                .setPlace(exhibitionDto.place())
-//                .setOrganizer(exhibitionDto.organizer());
-        exhibition.setStart_date(new Timestamp(122, 11, 17, 0, 0, 0, 0));
-        exhibition.setEnd_date(new Timestamp(122, 11, 18, 0, 0, 0, 0));
+    public void createExhibition(ExhibitionDto exhibitionDto) {
+        String dateTimeStartString = exhibitionDto.start_date().replace("T", " ");
+        String dateTimeEndString = exhibitionDto.start_date().replace("T", " ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTimeStart = LocalDateTime.parse(dateTimeStartString, formatter);
+        LocalDateTime dateTimeEnd = LocalDateTime.parse(dateTimeEndString, formatter);
+
+        Exhibition exhibition = new Exhibition()
+                .setName(exhibitionDto.name())
+                .setStart_date(Timestamp.valueOf(dateTimeStart))
+                .setEnd_date(Timestamp.valueOf(dateTimeEnd))
+                .setCountry(exhibitionDto.country())
+                .setCity(exhibitionDto.city())
+                .setPlace(exhibitionDto.place())
+                .setOrganizer(exhibitionDto.organizer());
         exhibitionRepository.save(exhibition);
     }
 

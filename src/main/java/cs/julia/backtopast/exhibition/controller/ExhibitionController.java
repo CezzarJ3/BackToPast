@@ -5,14 +5,12 @@ import cs.julia.backtopast.exhibition.controller.dto.ExhibitionDto;
 import cs.julia.backtopast.exhibition.domain.Exhibition;
 import cs.julia.backtopast.exhibition.service.ExhibitionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -55,14 +53,14 @@ public class ExhibitionController {
     }
 
     @PostMapping("/createExhibition")
-    public String createExhibit(@ModelAttribute("exhibitionDto") Exhibition exhibitionDto) {
+    public String createExhibit(@ModelAttribute("exhibitionDto") ExhibitionDto exhibitionDto) {
         exhibitionService.createExhibition(exhibitionDto);
         return "redirect:/exhibitions";
     }
 
     @GetMapping("/createExhibition")
     public String getExhibitionDto(Model model) {
-        model.addAttribute("exhibitionDto", new Exhibition());
+        model.addAttribute("exhibitionDto", new ExhibitionDto("", "", "", "", "", "", ""));
         return "createExhibition";
     }
 }

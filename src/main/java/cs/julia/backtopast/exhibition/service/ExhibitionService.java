@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.Collection;
 
 public interface ExhibitionService {
-    void createExhibition(Exhibition exhibition);
+    void createExhibition(ExhibitionDto exhibitionDto);
     Collection<Exhibition> finaAllByName(String name);
     void deleteExhibition(Integer id);
     void updateExhibition(Integer id, String newOrganizer);

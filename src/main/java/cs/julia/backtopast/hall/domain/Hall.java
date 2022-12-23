@@ -1,4 +1,4 @@
-package cs.julia.backtopast.hall;
+package cs.julia.backtopast.hall.domain;
 
 import cs.julia.backtopast.department.domain.Department;
 import lombok.*;

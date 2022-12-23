@@ -5,6 +5,8 @@ import cs.julia.backtopast.department.service.DepartmentService;
 import cs.julia.backtopast.exhibit.controller.dto.ExhibitDto;
 import cs.julia.backtopast.exhibit.domain.Exhibit;
 import cs.julia.backtopast.exhibit.service.ExhibitService;
+import cs.julia.backtopast.exhibitionpart.service.ExhibitionPartService;
+import cs.julia.backtopast.exhibitionpart.service.ExhibitionPartServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,10 +24,13 @@ public class ExhibitController {
     private final ExhibitService exhibitService;
     private final DepartmentService departmentService;
 
+    private final ExhibitionPartService exhibitionPartService;
+
     @Autowired
-    public ExhibitController(ExhibitService exhibitService, DepartmentService departmentService) {
+    public ExhibitController(ExhibitService exhibitService, DepartmentService departmentService, ExhibitionPartService exhibitionPartService) {
         this.exhibitService = exhibitService;
         this.departmentService = departmentService;
+        this.exhibitionPartService = exhibitionPartService;
     }
 
     @GetMapping
@@ -53,6 +58,9 @@ public class ExhibitController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
         model.addAttribute("exhibitToUpdate", new Exhibit());
+
+        int totalExhibits = exhibitService.findExhibitsByName("").size();
+        model.addAttribute("totalExhibits", totalExhibits);
         return "exhibits";
     }
 
