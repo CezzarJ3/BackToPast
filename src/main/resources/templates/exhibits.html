@@ -13,7 +13,7 @@
         <div class="content">
             <ul>
                 <li><a th:href="@{~/backtopastapp}">Главная</a></li>
-                <li  class="active"><a th:href="@{/exhibits}">Exhibits</a></li>
+                <li class="active"><a th:href="@{/exhibits}">Exhibits</a></li>
                 <li><a th:href="@{/departments}">Departments</a></li>
                 <li><a th:href="@{/exhibitions}">Exhibitions</a></li>
             </ul>
@@ -23,6 +23,14 @@
     <div class="create-object-style">
         <p><a th:href="@{/exhibits/createExhibit}">Создать экспонат</a></p>
     </div>
+
+    <div class="create-object-style" style="width: 300px">
+        <p><a th:href="@{/exhibitionParts/createExhibitionPart}">Создать экспонат-выставка</a></p>
+    </div>
+
+    <form>
+        <input type="text" >
+    </form>
 
     <div class="pagination-box">
         <div class="pagination">
@@ -69,13 +77,16 @@
                         <p>Экспонат:</p>
                         <p>Название: <span th:text="${exhibit.name}">Name</span></p>
                         <p>Прежнее описание: <span th:text="${exhibit.description}">Desc</span></p>
-                        <p>Новое описание: <input type="text" name="description" value="Desc" th:value="${exhibit.description}"/>
+                        <p>Новое описание: <input type="text" name="description" value="Desc"
+                                                  th:value="${exhibit.description}"/>
                         </p>
                         <p><input type="submit" value="Сохранить изменения"/>
                     </form>
                     <button th:onclick="|closeEditForm('editForm'+${exhibit.id})|">Закрыть</button>
                     <p><a th:href="@{/exhibits/deleteExhibit/{id}(id=${exhibit.id})}">Удалить</a></p>
 
+                    <p><a th:href="@{/exhibits/exhibitionParts/{id}(id=${exhibit.id})}">Показать дополнительную
+                        информацию</a></p>
                 </div>
             </div>
 

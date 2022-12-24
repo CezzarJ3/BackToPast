@@ -68,11 +68,11 @@ public class ExhibitServiceImpl implements ExhibitService {
     }
 
     @Override
-    public Page<Exhibit> findPaginated(Pageable pageable) {
+    public Page<Exhibit> findPaginated(Pageable pageable, String name) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = pageSize * currentPage;
-        List<Exhibit> exhibits = (List<Exhibit>) exhibitRepository.findAll();
+        List<Exhibit> exhibits = (List<Exhibit>) exhibitRepository.findExhibitByNameContainingIgnoreCase(name);
 
         List<Exhibit> list;
         if (exhibits.size() < startItem) {

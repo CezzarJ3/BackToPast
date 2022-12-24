@@ -5,6 +5,7 @@ import cs.julia.backtopast.department.service.DepartmentService;
 import cs.julia.backtopast.exhibit.controller.dto.ExhibitDto;
 import cs.julia.backtopast.exhibit.domain.Exhibit;
 import cs.julia.backtopast.exhibit.service.ExhibitService;
+import cs.julia.backtopast.exhibitionpart.domain.ExhibitionPart;
 import cs.julia.backtopast.exhibitionpart.service.ExhibitionPartService;
 import cs.julia.backtopast.exhibitionpart.service.ExhibitionPartServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,13 @@ public class ExhibitController {
 
     @GetMapping
     public String showExhibits(Model model, @RequestParam("page") Optional<Integer> page,
-                               @RequestParam("size") Optional<Integer> size) {
+                               @RequestParam("size") Optional<Integer> size, @RequestParam(value = "name", required = false) String name) {
 
+        if (name == null) {
+            name = "";
+        }
         int currentPage = page.orElse(1), pageSize = size.orElse(25);
-        Page<Exhibit> exhibitPage = exhibitService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+        Page<Exhibit> exhibitPage = exhibitService.findPaginated(PageRequest.of(currentPage - 1, pageSize), name);
         model.addAttribute("exhibitPage", exhibitPage);
 
         int totalPages = exhibitPage.getTotalPages();
@@ -62,6 +66,13 @@ public class ExhibitController {
         int totalExhibits = exhibitService.findExhibitsByName("").size();
         model.addAttribute("totalExhibits", totalExhibits);
         return "exhibits";
+    }
+
+    @GetMapping("/exhibitionParts/{id}")
+    public String showExhibitsAtExhibitions(Model model, @PathVariable("id") int id) {
+        List<ExhibitionPart> exhibitionPartsList = (List<ExhibitionPart>) exhibitionPartService.findExhibitionPartByExhibitId(id);
+        model.addAttribute("exhibitionParts", exhibitionPartsList);
+        return "exhibitionParts";
     }
 
     @GetMapping("/filter")

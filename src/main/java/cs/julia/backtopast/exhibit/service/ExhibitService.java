@@ -12,6 +12,6 @@ public interface ExhibitService {
     Collection<Exhibit> findExhibitsByName(String name);
     void deleteExhibit(int exhibitId);
     void updateExhibitDescription(Integer exhibitId, String newDescription);
-    Page<Exhibit> findPaginated(Pageable pageable);
+    Page<Exhibit> findPaginated(Pageable pageable, String name);
     Exhibit findById(int id);
 }

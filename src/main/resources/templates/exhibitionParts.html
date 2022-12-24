@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ExhibitionParts</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+    <link rel="stylesheet" th:href="@{/exhibit-page-styles.css}"/>
+</head>
+<body>
+<div class="main-content">
+    <div class="navbar">
+        <div class="content">
+            <ul>
+                <li><a th:href="@{~/backtopastapp}">Главная</a></li>
+                <li class="active"><a th:href="@{/exhibits}">Exhibits</a></li>
+                <li><a th:href="@{/departments}">Departments</a></li>
+                <li><a th:href="@{/exhibitions}">Exhibitions</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="create-object-style">
+        <p><a th:href="@{/exhibits}">Назад</a></p>
+    </div>
+
+    <table class="paginated-content-table" cellspacing="0">
+        <thead>
+        <tr>
+            <th th:text="NameOfExhibit"/>
+            <th th:text="NameOfExhibition"/>
+            <th th:text="StartDate"/>
+            <th th:text="EndDate"/>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="exhPart : ${exhibitionParts}">
+            <td th:text="${exhPart.exhibit.name}"></td>
+            <td th:text="${exhPart.exhibition.name}"></td>
+            <td th:text="${exhPart.exhibition.start_date}"/>
+            <td th:text="${exhPart.exhibition.end_date}"/>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
