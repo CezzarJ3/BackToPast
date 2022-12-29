@@ -4,5 +4,6 @@ public record ExhibitDto(String name,
                          String description,
                          int year,
                          String author,
-                         int type) {
+                         int type,
+                         int store) {
 }

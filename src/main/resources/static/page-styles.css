@@ -14,3 +14,19 @@
 .create-object-style a:hover {
     /*color: rgb(255, 249, 248);*/
 }
+
+.flex-block {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.flex-block-left {
+    margin: 10px;
+}
+
+.highlight-text {
+    font-size: 20px;
+    font-weight: bold;
+}

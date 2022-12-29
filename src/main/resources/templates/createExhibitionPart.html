@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Create exhibition part</title>
     <link rel="stylesheet" th:href="@{/styles.css}"/>
-    <link rel="stylesheet" th:href="@{/exhibit-page-styles.css}"/>
+    <link rel="stylesheet" th:href="@{/page-styles.css}"/>
 </head>
 <body>
 <div class="main-content">
@@ -23,7 +23,7 @@
     <form th:object="${exhibitionPartDto}" method="post">
         <p>Exhibit:
             <select th:field="*{exhibitId}">
-                <option th:each="exh : ${exhibits}" th:value="${exh.id}" th:text="${exh.name}"></option>
+                <option th:value="${exhibit.id}" th:text="${exhibit.name}"></option>
             </select></p>
         <p>Exhibition:
             <select th:field="*{exhibitionId}">

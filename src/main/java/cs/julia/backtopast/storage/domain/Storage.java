@@ -22,6 +22,9 @@ public class Storage {
     @Column(name = "manager", nullable = false)
     private String manager;
 
+    @Column(name = "number", nullable = false)
+    private int number;
+
     @ManyToOne
     @JoinColumn(name = "type", nullable = false)
     private Department department;

@@ -47,4 +47,9 @@ public class StorageServiceImpl implements StorageService {
     public Storage findById(int id) {
         return storageRepository.findById(id).get();
     }
+
+    @Override
+    public Collection<Storage> findAll() {
+        return (Collection<Storage>) storageRepository.findAll();
+    }
 }

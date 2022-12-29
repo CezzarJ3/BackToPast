@@ -8,6 +8,17 @@
 </head>
 <body>
 <div class="main-content">
+
+    <div class="navbar">
+        <div class="content">
+            <ul>
+                <li><a th:href="@{~/backtopastapp}">Главная</a></li>
+                <li><a th:href="@{/exhibits}">Exhibits</a></li>
+                <li><a th:href="@{/departments}">Departments</a></li>
+                <li><a th:href="@{/exhibitions}">Exhibitions</a></li>
+            </ul>
+        </div>
+    </div>
     <h1>Exhibits!</h1>
 
     <h1>Form to create an exhibit!</h1>
@@ -19,6 +30,10 @@
         <p>Department:
             <select th:field="*{type}">
                 <option th:each="dep : ${deps}"  th:value="${dep.id}" th:text="${dep.name}"></option>
+            </select></p>
+        <p>Storage:
+            <select th:field="*{store}">
+                <option th:each="store : ${stores}"  th:value="${store.id}" th:text="${store.number}"></option>
             </select></p>
         <p><input type="submit" value="Submit"/>
     </form>

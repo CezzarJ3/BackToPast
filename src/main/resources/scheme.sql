@@ -1,18 +1,20 @@
 create table EXHIBIT
 (
     id          int primary key auto_increment,
-    name        varchar(100)  not null,
+    name        varchar(100) not null,
     description varchar(255) not null,
-    year        int         not null,
+    year        int          not null,
     author      varchar(100),
     type        int          not null,
-    constraint fk_type foreign key (type) references DEPARTMENT (id)
+    store       int,
+    constraint fk_type foreign key (type) references DEPARTMENT (id),
+    constraint fk_store foreign key (store) references STORAGE (id)
 );
 
 create table EXHIBITION
 (
     id         int primary key auto_increment,
-    name       varchar(100)  not null,
+    name       varchar(100) not null,
     start_date TIMESTAMP    not null,
     end_date   TIMESTAMP    not null,
     country    varchar(50)  not null,
@@ -32,6 +34,7 @@ create table STORAGE
     id      int primary key auto_increment,
     type    int         not null,
     manager varchar(50) not null,
+    number  int,
     constraint fk_type_storage foreign key (type) references DEPARTMENT (id)
 );
 

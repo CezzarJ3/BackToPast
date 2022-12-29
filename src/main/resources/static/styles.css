@@ -65,6 +65,7 @@ body a {
     margin: 0 auto;
     color: #262626;
     font-size: 17px;
+    padding: 10px;
 }
 
 .pagination-box {

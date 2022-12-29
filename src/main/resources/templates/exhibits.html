@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Exhibits</title>
     <link rel="stylesheet" th:href="@{/styles.css}"/>
-    <link rel="stylesheet" th:href="@{/exhibit-page-styles.css}"/>
+    <link rel="stylesheet" th:href="@{/page-styles.css}"/>
 </head>
 <body>
 <div class="main-content">
@@ -24,32 +24,45 @@
         <p><a th:href="@{/exhibits/createExhibit}">Создать экспонат</a></p>
     </div>
 
-    <div class="create-object-style" style="width: 300px">
-        <p><a th:href="@{/exhibitionParts/createExhibitionPart}">Создать экспонат-выставка</a></p>
+    <div class="flex-block">
+        <div class="flex-block-left">
+            <form th:action="@{/exhibits(size=${exhibitPage.size}, page=1, name=${filterName}, year=${filterYear})}" th:object="${filterObject}" class="form-popup-content">
+                <p class="highlight-text"> Искать по имени: <input type="text" th:placeholder="${filterName}" th:field="*{name}"></p>
+                <p class="highlight-text"> Искать по году: <input type="number" th:placeholder="${filterYear}" th:field="*{year}"></p>
+                <button type="submit" class="highlight-text">Искать</button>
+            </form>
+        </div>
+
+        <div class="flex-block-left">
+            <form th:action="@{/exhibits(size=${exhibitPage.size}, page=1, name=${filterName}, year=${filterYear})}">
+                <button type="submit" th:value="${''}" th:name="${filterObject.name}" class="highlight-text">Сбросить
+                    поиск
+                </button>
+            </form>
+        </div>
     </div>
 
-    <form>
-        <input type="text" >
-    </form>
-
-    <div class="pagination-box">
-        <div class="pagination">
-            <a th:href="@{/exhibits(size=${exhibitPage.size}, page=1)}"
-               class="pagination"> << </a>
-            <div th:if="${exhibitPage.totalPages > 0}"
-                 th:each="pageNumber : ${pageNumbers}" class="pagination">
-                <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumber})}"
-                   th:text="${pageNumber}"
-                   th:class="${pageNumber==exhibitPage.number + 1} ? active"></a>
-            </div>
+    <div th:if="${pageNumbers.size()>1}">
+        <div class="pagination-box">
             <div class="pagination">
-                <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumbers.get(pageNumbers.size()-1)})}"
-                   class="pagination"> >> </a>
+                <a th:href="@{/exhibits(size=${exhibitPage.size}, page=1, name=${filterName}, year=${filterYear})}"
+                   class="pagination"> << </a>
+                <div th:if="${exhibitPage.totalPages > 0}"
+                     th:each="pageNumber : ${pageNumbers}" class="pagination">
+                    <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumber}, name=${filterName}, year=${filterYear})}"
+                       th:text="${pageNumber}"
+                       th:class="${pageNumber==exhibitPage.number + 1} ? active"></a>
+                </div>
+                <div class="pagination">
+                    <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumbers.get(pageNumbers.size()-1)}, name=${filterName}, year=${filterYear})}"
+                       class="pagination"> >> </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <p>Всего экспонатов: <span th:text="${totalExhibits}"/></p>
+
+    <p class="highlight-text">Всего экспонатов: <span th:text="${totalExhibits}"/></p>
 
     <table class="paginated-content-table" cellspacing="0">
         <thead>
@@ -60,6 +73,7 @@
             <th th:text="Year"/>
             <th th:text="Author"/>
             <th th:text="Deparment"/>
+            <th th:text="Storage"/>
         </tr>
         </thead>
         <tbody>
@@ -85,8 +99,14 @@
                     <button th:onclick="|closeEditForm('editForm'+${exhibit.id})|">Закрыть</button>
                     <p><a th:href="@{/exhibits/deleteExhibit/{id}(id=${exhibit.id})}">Удалить</a></p>
 
-                    <p><a th:href="@{/exhibits/exhibitionParts/{id}(id=${exhibit.id})}">Показать дополнительную
+                    <p style="margin-top: 15px"><a th:href="@{/exhibits/exhibitionParts/{id}(id=${exhibit.id})}">Показать
+                        дополнительную
                         информацию</a></p>
+
+                    <div style="margin-top: 15px">
+                        <p><a th:href="@{/exhibitionParts/createExhibitionPart/{id}(id=${exhibit.id})}">Добавить участие
+                            в выставке</a></p>
+                    </div>
                 </div>
             </div>
 
@@ -94,25 +114,31 @@
             <td th:text="${exhibit.year}"/>
             <td th:text="${exhibit.author}"/>
             <td th:text="${exhibit.department.name}"/>
+            <td th:text="${exhibit?.storage?.number}"/>
         </tr>
         </tbody>
     </table>
 
-    <div class="pagination-box">
-        <div class="pagination">
-            <a th:href="@{/exhibits(size=${exhibitPage.size}, page=1)}"
-               class="pagination"> << </a>
-            <div th:if="${exhibitPage.totalPages > 0}"
-                 th:each="pageNumber : ${pageNumbers}" class="pagination">
-                <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumber})}"
-                   th:text="${pageNumber}"
-                   th:class="${pageNumber==exhibitPage.number + 1} ? active"></a>
-            </div>
+    <div th:if="${pageNumbers.size()>1}">
+        <div class="pagination-box">
             <div class="pagination">
-                <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumbers.get(pageNumbers.size()-1)})}"
-                   class="pagination"> >> </a>
+                <a th:href="@{/exhibits(size=${exhibitPage.size}, page=1, name=${filterName}, year=${filterYear})}"
+                   class="pagination"> << </a>
+                <div th:if="${exhibitPage.totalPages > 0}"
+                     th:each="pageNumber : ${pageNumbers}" class="pagination">
+                    <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumber}, name=${filterName}, year=${filterYear})}"
+                       th:text="${pageNumber}"
+                       th:class="${pageNumber==exhibitPage.number + 1} ? active"></a>
+                </div>
+                <div class="pagination">
+                    <a th:href="@{/exhibits(size=${exhibitPage.size}, page=${pageNumbers.get(pageNumbers.size()-1)}, name=${filterName}, year=${filterYear})}"
+                       class="pagination"> >> </a>
+                </div>
             </div>
         </div>
+    </div>
+    <div th:unless="${pageNumbers.size()>1}">
+
     </div>
 
 </div>

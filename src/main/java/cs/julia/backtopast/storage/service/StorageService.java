@@ -13,4 +13,6 @@ public interface StorageService {
     void deleteStorage(int storageId);
 
     Storage findById(int id);
+
+    Collection<Storage>  findAll();
 }

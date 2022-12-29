@@ -9,10 +9,7 @@ import cs.julia.backtopast.exhibitionpart.service.ExhibitionPartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,19 +27,19 @@ public class ExhibitionPartController {
         this.exhibitionPartService = exhibitionPartService;
     }
 
-    @GetMapping("/createExhibitionPart")
-    public String createExhibitionPart(Model model) {
-        List<Exhibit> exhibits = (List<Exhibit>) exhibitService.findExhibitsByName("");
+    @GetMapping("/createExhibitionPart/{id}")
+    public String createExhibitionPart(Model model, @PathVariable("id") int id) {
+        Exhibit exhibits = exhibitService.findById(id);
         List<Exhibition> exhibitions = (List<Exhibition>) exhibitionService.finaAllByName("");
-        model.addAttribute("exhibits", exhibits);
+        model.addAttribute("exhibit", exhibits);
         model.addAttribute("exhibitions", exhibitions);
         model.addAttribute("exhibitionPartDto", new ExhibitionPartDto(0, 0));
 
         return "createExhibitionPart";
     }
 
-    @PostMapping("/createExhibitionPart")
-    public String postCreateExhibitionPart(@ModelAttribute("exhibitionPartDto") ExhibitionPartDto exhibitionPartDto) {
+    @PostMapping("/createExhibitionPart/{id}")
+    public String postCreateExhibitionPart(@ModelAttribute("exhibitionPartDto") ExhibitionPartDto exhibitionPartDto, @PathVariable("id") int id) {
         exhibitionPartService.createExhibitionPart(exhibitionPartDto);
         return "redirect:/exhibits";
     }

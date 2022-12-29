@@ -1,6 +1,7 @@
 package cs.julia.backtopast.exhibit.domain;
 
 import cs.julia.backtopast.department.domain.Department;
+import cs.julia.backtopast.storage.domain.Storage;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -34,4 +35,8 @@ public class Exhibit {
     @ManyToOne
     @JoinColumn(name = "type",referencedColumnName = "id", nullable = false)
     private Department department;
+
+    @ManyToOne
+    @JoinColumn(name = "store", referencedColumnName = "id")
+    private Storage storage;
 }
